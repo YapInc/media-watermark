@@ -26,7 +26,7 @@ MediaWatermark is a GPU/CPU-based iOS watermark library for overlays adding to v
   s.author           = { 'Sergey Afanasiev' => 'sergey.afanasiev@rubygarage.org' }
   s.source           = { :git => 'https://github.com/rubygarage/media-watermark.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'Sources/Classes/**/*'
 
