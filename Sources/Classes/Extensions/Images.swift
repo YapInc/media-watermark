@@ -13,6 +13,33 @@ let kImageBitsPerComponent: Int = 8
 let kImageBitsPerPixel: Int = 32
 let kImageBytesCount: Int = 4
 
+@available(iOS 10.0, *)
+extension UIView {
+    func scale(by scale: CGFloat) {
+        self.contentScaleFactor = scale
+        for subview in self.subviews {
+            subview.scale(by: scale)
+        }
+    }
+
+    @available(iOS 10.0, *)
+    func getImage(scale: CGFloat? = nil) -> UIImage {
+        let newScale = scale ?? UIScreen.main.scale
+        self.scale(by: newScale)
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = newScale
+
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size, format: format)
+
+        let image = renderer.image { rendererContext in
+            self.layer.render(in: rendererContext.cgContext)
+        }
+
+        return image
+    }
+}
+
 extension UIImage {
     convenience init(view: UIView) {
         UIGraphicsBeginImageContext(view.frame.size)
